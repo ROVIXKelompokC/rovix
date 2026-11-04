@@ -5,32 +5,32 @@
 @section('subheader', 'Daftar Surat Perintah Kerja (SPK) Aktif, Koordinat Lokasi, & Instruksi Penanganan')
 
 @section('content')
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-    <div class="bg-[#F4F1EA] p-5 rounded-lg border border-[#263B36]/15">
-        <p class="text-[11px] font-mono-tech text-[#353A37]/70 uppercase">SPK Ditugaskan</p>
-        <p class="text-3xl font-bold font-mono-tech text-[#C76B45] mt-1">{{ $stats['assigned'] }}</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+    <div class="bg-[#F4F1EA] px-4 py-3 rounded-lg border border-[#263B36]/15 flex items-baseline justify-between">
+        <p class="text-[10px] font-mono-tech text-[#353A37]/70 uppercase">SPK Ditugaskan</p>
+        <p class="text-2xl font-bold font-mono-tech text-[#C76B45]">{{ $stats['assigned'] }}</p>
     </div>
-    <div class="bg-[#F4F1EA] p-5 rounded-lg border border-[#263B36]/15">
-        <p class="text-[11px] font-mono-tech text-[#353A37]/70 uppercase">Dalam Pengerjaan</p>
-        <p class="text-3xl font-bold font-mono-tech text-[#263B36] mt-1">{{ $stats['in_progress'] }}</p>
+    <div class="bg-[#F4F1EA] px-4 py-3 rounded-lg border border-[#263B36]/15 flex items-baseline justify-between">
+        <p class="text-[10px] font-mono-tech text-[#353A37]/70 uppercase">Dalam Pengerjaan</p>
+        <p class="text-2xl font-bold font-mono-tech text-[#263B36]">{{ $stats['in_progress'] }}</p>
     </div>
-    <div class="bg-[#F4F1EA] p-5 rounded-lg border border-[#263B36]/15">
-        <p class="text-[11px] font-mono-tech text-[#353A37]/70 uppercase">Selesai Dikerjakan</p>
-        <p class="text-3xl font-bold font-mono-tech text-[#263B36] mt-1">{{ $stats['completed'] }}</p>
+    <div class="bg-[#F4F1EA] px-4 py-3 rounded-lg border border-[#263B36]/15 flex items-baseline justify-between">
+        <p class="text-[10px] font-mono-tech text-[#353A37]/70 uppercase">Selesai Dikerjakan</p>
+        <p class="text-2xl font-bold font-mono-tech text-[#263B36]">{{ $stats['completed'] }}</p>
     </div>
 </div>
 
-<div class="bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-6">
-    <div class="pb-4 mb-5 border-b border-[#263B36]/10 flex items-center justify-between">
+<div class="bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-4 sm:p-5">
+    <div class="pb-3 mb-4 border-b border-[#263B36]/10 flex flex-wrap items-center justify-between gap-2">
         <h3 class="font-bold text-[#263B36] text-xs uppercase tracking-wider">Daftar Surat Perintah Kerja ({{ auth()->user()->name }})</h3>
         <span class="font-mono-tech text-xs text-[#353A37]/70">{{ $myWorkOrders->count() }} PENUGASAN</span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         @forelse($myWorkOrders as $wo)
-        <div class="p-5 rounded-lg border border-[#263B36]/15 bg-[#E9E5DA]/50 flex flex-col justify-between">
+        <div class="p-4 rounded-lg border border-[#263B36]/15 bg-[#E9E5DA]/50 flex flex-col justify-between">
             <div>
-                <div class="flex items-center justify-between mb-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                     <span class="font-mono-tech font-bold text-xs text-[#263B36]">{{ $wo->spk_number }}</span>
                     <span class="px-2 py-0.5 text-[10px] font-mono-tech font-semibold rounded bg-[#A7B5A0]/40 text-[#263B36] uppercase">
                         {{ $wo->work_status }}
@@ -46,11 +46,11 @@
                     {{ $wo->repair_notes ?? 'Lakukan perbaikan struktur perkerasan jalan sesuai standar teknis.' }}
                 </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-[#263B36]/10 flex items-center justify-between">
+            <div class="mt-4 pt-3 border-t border-[#263B36]/10 flex flex-wrap items-center justify-between gap-2.5">
                 @if($wo->report)
                 <span class="font-mono-tech text-[11px] text-[#353A37]/70">{{ $wo->report->latitude }}, {{ $wo->report->longitude }}</span>
                 <a target="_blank" href="https://www.google.com/maps?q={{ $wo->report->latitude }},{{ $wo->report->longitude }}"
-                    class="px-3 py-1.5 bg-[#C76B45] text-white rounded text-xs font-semibold hover:bg-[#b25c39] transition">
+                    class="px-3.5 py-2 bg-[#C76B45] text-white rounded text-xs font-semibold hover:bg-[#b25c39] transition text-center w-full sm:w-auto">
                     Buka Koordinat Peta &rarr;
                 </a>
                 @endif
