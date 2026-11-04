@@ -5,7 +5,7 @@
 @section('subheader', 'Perbarui profil pengguna, role, dan wilayah kecamatan')
 
 @section('content')
-<div class="max-w-3xl bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 sm:p-6">
+<div class="w-full bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 sm:p-6">
     @if($errors->any())
         <div class="mb-6 p-4 rounded bg-[#C76B45]/15 border-l-2 border-[#C76B45] text-[#263B36] text-xs space-y-1">
             @foreach($errors->all() as $err)

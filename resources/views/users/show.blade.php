@@ -5,7 +5,7 @@
 @section('subheader', 'Informasi akun, wilayah tugas, dan riwayat aktivitas pengguna')
 
 @section('content')
-<div class="max-w-4xl space-y-4">
+<div class="w-full space-y-4">
     <div class="bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
             <div class="w-12 h-12 rounded bg-[#263B36] text-[#E9E5DA] font-mono-tech font-bold text-base flex items-center justify-center shrink-0">

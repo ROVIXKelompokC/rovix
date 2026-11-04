@@ -77,10 +77,10 @@
     <!-- Backdrop Overlay Drawer Mobile -->
     <div id="mobileMenuBackdrop" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
 
-    <div class="flex min-h-screen relative">
+    <div class="flex min-h-screen lg:h-screen relative">
         <!-- Sidebar Navigasi Utama -->
         <aside id="sidebarDrawer"
-            class="fixed inset-y-0 left-0 z-50 w-56 bg-[#263B36] text-[#E9E5DA] flex flex-col shrink-0 border-r border-[#1a2925] transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 ease-in-out">
+            class="fixed inset-y-0 left-0 z-50 w-56 lg:h-screen bg-[#263B36] text-[#E9E5DA] flex flex-col shrink-0 border-r border-[#1a2925] transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 ease-in-out">
             <div class="px-4 py-3 border-b border-[#A7B5A0]/15 flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
                     <div class="w-7 h-7 rounded bg-[#C76B45] flex items-center justify-center text-white shrink-0">
@@ -196,9 +196,9 @@
             </div>
         </aside>
 
-        <!-- Area Konten Utama -->
-        <div class="flex-1 flex flex-col min-w-0 bg-[#E9E5DA]">
-            <header class="bg-[#F4F1EA] border-b border-[#263B36]/15 px-4 sm:px-5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <!-- Area Konten Utama Fleksibel -->
+        <div class="flex-1 flex flex-col min-w-0 lg:h-screen lg:overflow-y-auto bg-[#E9E5DA]">
+            <header class="bg-[#F4F1EA] border-b border-[#263B36]/15 px-4 sm:px-5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
                 <div>
                     <h2 class="text-sm sm:text-base font-bold text-[#263B36] tracking-tight leading-snug">@yield('header', 'Dashboard ROVIX')</h2>
                     <p class="text-[11px] text-[#353A37]/75">@yield('subheader', 'Sistem Informasi Pelaporan & Perbaikan Jalan')</p>
@@ -212,7 +212,7 @@
                 @endif
             </header>
 
-            <main class="flex-1 p-3 sm:p-4 pb-20 lg:pb-4">
+            <main class="flex-1 flex flex-col min-h-0 p-3 sm:p-4 lg:p-3 pb-20 lg:pb-3">
                 @if(session('success'))
                     <div class="mb-3 px-3.5 py-2 rounded bg-[#A7B5A0]/25 border-l-2 border-[#263B36] text-[#263B36] text-xs font-medium">
                         {{ session('success') }}

@@ -5,7 +5,7 @@
 @section('subheader', 'Pendaftaran akun Administrator Dinas, Petugas Teknis Lapangan, atau Warga Pelapor')
 
 @section('content')
-<div class="max-w-3xl bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 sm:p-6">
+<div class="w-full bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 sm:p-6">
     @if($errors->any())
         <div class="mb-6 p-4 rounded bg-[#C76B45]/15 border-l-2 border-[#C76B45] text-[#263B36] text-xs space-y-1">
             <p class="font-bold">Periksa kembali isian formulir:</p>
