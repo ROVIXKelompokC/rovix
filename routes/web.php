@@ -37,35 +37,30 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Kerangka Menu Fitur Operasional & Master Data (Siap dikerjakan anggota tim)
     Route::view('/verifications', 'layouts.placeholder', [
-        'icon' => '🗺️',
         'title' => 'Verifikasi Laporan & Pemetaan Web GIS',
         'subtitle' => 'Validasi laporan aduan masyarakat, deteksi duplikasi spasial, dan pencatatan audit log',
         'description' => 'Modul antrean verifikasi laporan masuk, peta sebaran titik kerusakan jalan, serta riwayat perubahan status (Audit Log).',
     ])->name('verifications.index');
 
     Route::view('/work-orders', 'layouts.placeholder', [
-        'icon' => '🛠️',
         'title' => 'Disposisi Surat Perintah Kerja (SPK) Digital',
         'subtitle' => 'Penerbitan SPK perbaikan jalan, penugasan petugas teknis lapangan, dan pemantauan target SLA',
         'description' => 'Modul pengelolaan disposisi SPK digital dari laporan yang telah terverifikasi kepada petugas teknis lapangan.',
     ])->name('work-orders.index');
 
     Route::view('/categories', 'layouts.placeholder', [
-        'icon' => '🏷️',
         'title' => 'Master Data Kategori Kerusakan Jalan',
         'subtitle' => 'Pengelolaan klasifikasi jenis kerusakan infrastruktur jalan dan bobot tingkat keparahan (Severity Level)',
         'description' => 'Modul manajemen daftar kategori kerusakan jalan beserta indeks tingkat keparahan (skala 1 hingga 5).',
     ])->name('categories.index');
 
     Route::view('/districts', 'layouts.placeholder', [
-        'icon' => '📍',
         'title' => 'Master Data Wilayah & Zonasi Kecamatan',
         'subtitle' => 'Pengelolaan daftar wilayah administratif kecamatan dan kode kota operasional Dinas PU',
         'description' => 'Modul manajemen data master wilayah kecamatan untuk pengelompokan lokasi laporan dan penugasan zona petugas.',
     ])->name('districts.index');
 
     Route::view('/ratings', 'layouts.placeholder', [
-        'icon' => '⭐',
         'title' => 'Evaluasi & Indeks Kepuasan Masyarakat',
         'subtitle' => 'Rekapitulasi penilaian rating bintang 1–5 dan ulasan warga terhadap hasil perbaikan jalan',
         'description' => 'Modul pemantauan dan evaluasi mutu hasil pengerjaan petugas lapangan berdasarkan ulasan warga pelapor.',
@@ -79,8 +74,7 @@ Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petu
     Route::get('/dashboard', [DashboardController::class, 'petugasDashboard'])->name('dashboard');
 
     Route::view('/work-orders', 'layouts.placeholder', [
-        'icon' => '📷',
-        'title' => 'Update Progres & Bukti Fisik Perbaikan (After)',
+        'title' => 'Pembaruan Progres & Bukti Fisik Perbaikan',
         'subtitle' => 'Pembaruan status pengerjaan SPK di lapangan dan pengunggahan dokumentasi foto selesai diperbaiki',
         'description' => 'Modul lapangan bagi petugas teknis untuk memperbarui status SPK, mencatat pemakaian material, dan mengunggah foto hasil perbaikan.',
     ])->name('work-orders.index');
@@ -93,14 +87,12 @@ Route::middleware(['auth', 'role:warga,admin'])->prefix('warga')->name('warga.')
     Route::get('/dashboard', [DashboardController::class, 'wargaDashboard'])->name('dashboard');
 
     Route::view('/reports/create', 'layouts.placeholder', [
-        'icon' => '📸',
         'title' => 'Buat Laporan Kerusakan Jalan Baru',
         'subtitle' => 'Unggah foto kerusakan jalan, penguncian koordinat GPS otomatis, dan validasi citra berbasis AI',
         'description' => 'Modul formulir pengajuan laporan kerusakan jalan oleh warga lengkap dengan pengambilan titik koordinat lokasi dan pemeriksaan AI.',
     ])->name('reports.create');
 
     Route::view('/ratings', 'layouts.placeholder', [
-        'icon' => '⭐',
         'title' => 'Penilaian & Ulasan Hasil Perbaikan Jalan',
         'subtitle' => 'Berikan penilaian bintang 1–5 dan ulasan atas tiket laporan yang telah selesai diperbaiki (Resolved)',
         'description' => 'Modul evaluasi kepuasan warga terhadap kualitas dan kecepatan tindak lanjut perbaikan jalan oleh Dinas PU.',

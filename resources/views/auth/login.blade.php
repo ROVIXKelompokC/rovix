@@ -4,63 +4,71 @@
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center bg-[#E9E5DA] p-6">
-    <div class="max-w-4xl w-full grid md:grid-cols-2 bg-[#F5F2EB] rounded-2xl shadow-2xl border border-[#A7B5A0]/50 overflow-hidden">
+    <div class="max-w-4xl w-full grid md:grid-cols-12 bg-[#F4F1EA] rounded-lg border border-[#263B36]/20 overflow-hidden shadow-sm">
 
-        <!-- Kolom Kiri: Identitas Utama (Forest Green #263B36) -->
-        <div class="bg-[#263B36] text-[#E9E5DA] p-8 flex flex-col justify-between">
+        <!-- Kolom Kiri: Identitas Sistem (Forest Green #263B36) -->
+        <div class="md:col-span-6 bg-[#263B36] text-[#E9E5DA] p-9 flex flex-col justify-between">
             <div>
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-11 h-11 rounded-xl bg-[#C76B45] text-white font-extrabold flex items-center justify-center text-xl shadow">
-                        RV
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded bg-[#C76B45] text-white flex items-center justify-center">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19L9 5"/><path d="M15 5L20 19"/><path d="M12 6V8"/><path d="M12 11V13"/><path d="M12 16V18"/>
+                        </svg>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold tracking-tight text-white">ROVIX</h1>
-                        <p class="text-xs text-[#A7B5A0] font-medium">Road Vigilance & Index • SDG 11</p>
+                        <h1 class="text-base font-bold tracking-tight text-white leading-none">ROVIX</h1>
+                        <p class="text-[11px] text-[#A7B5A0] font-mono-tech mt-1">ROAD VIGILANCE & INDEX</p>
                     </div>
                 </div>
 
-                <h2 class="text-2xl font-bold leading-snug mb-3 text-white">
-                    Sistem Informasi Pelaporan & Tindak Lanjut Kerusakan Jalan
+                <h2 class="text-xl font-bold leading-snug mb-3 text-white tracking-tight">
+                    Sistem Informasi Pemantauan & Tindak Lanjut Kerusakan Jalan
                 </h2>
-                <p class="text-xs text-[#E9E5DA]/85 leading-relaxed mb-6">
-                    Platform web monolitik terpadu dengan pendekatan <strong>Role-Based Access Control (RBAC)</strong>, penguncian koordinat GPS otomatis, serta validasi citra berbasis AI Vision.
+                <p class="text-xs text-[#E9E5DA]/80 leading-relaxed mb-8">
+                    Platform pengelolaan laporan infrastruktur jalan berbasis geospasial, penguncian koordinat GPS otomatis, serta disposisi Surat Perintah Kerja (SPK) terintegrasi.
                 </p>
 
-                <div class="bg-[#1d2e2a] border border-[#A7B5A0]/30 rounded-xl p-4 space-y-2.5 text-xs">
-                    <p class="font-semibold text-[#C76B45] uppercase tracking-wider">🔑 Akun Uji Coba Multi-Role (RBAC):</p>
-                    <div class="flex justify-between items-center border-b border-[#A7B5A0]/20 pb-1.5">
-                        <span><strong>Admin Dinas PU:</strong> <code class="text-[#A7B5A0]">admin@rovix.id</code></span>
-                        <span class="text-[#E9E5DA]/70">pass: <code>password</code></span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-[#A7B5A0]/20 pb-1.5">
-                        <span><strong>Petugas Lapangan:</strong> <code class="text-[#A7B5A0]">petugas@rovix.id</code></span>
-                        <span class="text-[#E9E5DA]/70">pass: <code>password</code></span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span><strong>Warga Pelapor:</strong> <code class="text-[#A7B5A0]">warga@rovix.id</code></span>
-                        <span class="text-[#E9E5DA]/70">pass: <code>password</code></span>
+                <div class="border-t border-[#A7B5A0]/20 pt-5">
+                    <p class="font-mono-tech text-[10px] text-[#A7B5A0] uppercase tracking-widest mb-3">Kredensial Akses Lingkungan Uji (RBAC)</p>
+                    <div class="space-y-2 text-xs font-mono-tech">
+                        <div class="flex justify-between items-center py-1.5 border-b border-[#A7B5A0]/10">
+                            <span class="text-[#E9E5DA]/70">ADMIN DINAS</span>
+                            <span class="text-white">admin@rovix.id / password</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1.5 border-b border-[#A7B5A0]/10">
+                            <span class="text-[#E9E5DA]/70">PETUGAS PU</span>
+                            <span class="text-white">petugas@rovix.id / password</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1.5">
+                            <span class="text-[#E9E5DA]/70">WARGA</span>
+                            <span class="text-white">warga@rovix.id / password</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <p class="text-[11px] text-[#A7B5A0] mt-6">
-                ROVIX — Citizen-Led Road Monitoring & Infrastructure Vigilance
-            </p>
+            <div class="pt-6 border-t border-[#A7B5A0]/15 flex items-center justify-between text-[11px] font-mono-tech text-[#A7B5A0]/80">
+                <span>DINAS PEKERJAAN UMUM</span>
+                <span>SDG 11.2</span>
+            </div>
         </div>
 
-        <!-- Kolom Kanan: Form Login -->
-        <div class="p-8 flex flex-col justify-center text-[#353A37]">
-            <h3 class="text-2xl font-bold text-[#263B36] mb-1">Masuk ke Akun Anda</h3>
-            <p class="text-xs text-[#353A37]/75 mb-6">Sistem akan mengarahkan ke dasbor sesuai peran (Role) Anda</p>
+        <!-- Kolom Kanan: Form Otentikasi -->
+        <div class="md:col-span-6 p-9 flex flex-col justify-center text-[#353A37]">
+            <div class="mb-6">
+                <p class="font-mono-tech text-[10px] uppercase tracking-widest text-[#C76B45] font-semibold mb-1">Otentikasi Pengguna</p>
+                <h3 class="text-xl font-bold text-[#263B36] tracking-tight">Masuk ke Portal Sistem</h3>
+                <p class="text-xs text-[#353A37]/70 mt-1">Gunakan akun sesuai wewenang peran operasional Anda.</p>
+            </div>
 
             @if($errors->any())
-                <div class="mb-4 p-3 rounded-lg bg-[#C76B45]/15 border border-[#C76B45]/40 text-[#263B36] text-xs font-medium">
+                <div class="mb-4 p-3 rounded bg-[#C76B45]/15 border-l-2 border-[#C76B45] text-[#263B36] text-xs font-medium">
                     {{ $errors->first() }}
                 </div>
             @endif
 
             @if(session('success'))
-                <div class="mb-4 p-3 rounded-lg bg-[#A7B5A0]/30 border border-[#263B36]/30 text-[#263B36] text-xs font-medium">
+                <div class="mb-4 p-3 rounded bg-[#A7B5A0]/30 border-l-2 border-[#263B36] text-[#263B36] text-xs font-medium">
                     {{ session('success') }}
                 </div>
             @endif
@@ -68,35 +76,35 @@
             <form action="{{ route('login.submit') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-xs font-semibold text-[#263B36] mb-1">Alamat Email</label>
+                    <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Alamat Email</label>
                     <input type="email" name="email" value="{{ old('email', 'admin@rovix.id') }}" required
-                        class="w-full px-3.5 py-2.5 rounded-lg border border-[#A7B5A0] bg-white text-[#353A37] text-sm focus:ring-2 focus:ring-[#C76B45] focus:border-[#C76B45] outline-none"
-                        placeholder="nama@email.com">
+                        class="w-full px-3.5 py-2 rounded border border-[#263B36]/25 bg-white text-[#353A37] text-sm focus:border-[#C76B45] outline-none transition"
+                        placeholder="nama@instansi.go.id">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-[#263B36] mb-1">Kata Sandi</label>
+                    <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Kata Sandi</label>
                     <input type="password" name="password" value="password" required
-                        class="w-full px-3.5 py-2.5 rounded-lg border border-[#A7B5A0] bg-white text-[#353A37] text-sm focus:ring-2 focus:ring-[#C76B45] focus:border-[#C76B45] outline-none"
+                        class="w-full px-3.5 py-2 rounded border border-[#263B36]/25 bg-white text-[#353A37] text-sm focus:border-[#C76B45] outline-none transition"
                         placeholder="••••••••">
                 </div>
 
-                <div class="flex items-center justify-between text-xs">
-                    <label class="flex items-center gap-2 text-[#353A37]">
-                        <input type="checkbox" name="remember" class="rounded border-[#A7B5A0]">
-                        Ingat sesi saya
+                <div class="flex items-center justify-between text-xs pt-1">
+                    <label class="flex items-center gap-2 text-[#353A37]/80 cursor-pointer">
+                        <input type="checkbox" name="remember" class="rounded border-[#263B36]/30">
+                        <span>Simpan sesi perangkat ini</span>
                     </label>
                 </div>
 
                 <button type="submit"
-                    class="w-full py-2.5 px-4 bg-[#C76B45] hover:bg-[#b25c39] text-white font-bold rounded-lg text-sm shadow transition">
-                    Masuk Sekarang →
+                    class="w-full py-2.5 px-4 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs uppercase tracking-wider transition">
+                    Masuk ke Sistem
                 </button>
             </form>
 
-            <div class="mt-6 pt-5 border-t border-[#A7B5A0]/40 text-center text-xs text-[#353A37]">
-                Warga belum memiliki akun?
-                <a href="{{ route('register') }}" class="font-bold text-[#C76B45] hover:underline">Daftar Akun Warga</a>
+            <div class="mt-6 pt-5 border-t border-[#263B36]/10 text-xs text-[#353A37]/80 flex items-center justify-between">
+                <span>Belum terdaftar sebagai pelapor?</span>
+                <a href="{{ route('register') }}" class="font-semibold text-[#C76B45] hover:underline">Registrasi Akun Warga</a>
             </div>
         </div>
 
