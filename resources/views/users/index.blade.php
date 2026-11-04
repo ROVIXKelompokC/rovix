@@ -33,14 +33,14 @@
                 placeholder="Cari nama, email, atau nomor telepon..."
                 class="px-3.5 py-2 rounded border border-[#263B36]/25 bg-white text-[#353A37] text-xs w-full md:w-64 focus:border-[#C76B45] outline-none">
 
-            <select name="role" class="px-3 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-xs bg-white">
+            <select name="role" class="px-3 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-xs bg-white w-full sm:w-auto">
                 <option value="">Semua Peran (RBAC)</option>
                 <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin Dinas PU</option>
                 <option value="petugas" {{ request('role') === 'petugas' ? 'selected' : '' }}>Petugas Lapangan</option>
                 <option value="warga" {{ request('role') === 'warga' ? 'selected' : '' }}>Warga Pelapor</option>
             </select>
 
-            <select name="district_id" class="px-3 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-xs bg-white">
+            <select name="district_id" class="px-3 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-xs bg-white w-full sm:w-auto">
                 <option value="">Semua Wilayah Kecamatan</option>
                 @foreach($districts as $d)
                     <option value="{{ $d->id }}" {{ (string) request('district_id') === (string) $d->id ? 'selected' : '' }}>
@@ -49,19 +49,19 @@
                 @endforeach
             </select>
 
-            <button type="submit" class="px-4 py-2 bg-[#263B36] text-white rounded text-xs font-semibold hover:bg-[#1d2e2a] transition">
+            <button type="submit" class="px-4 py-2 bg-[#263B36] text-white rounded text-xs font-semibold hover:bg-[#1d2e2a] transition w-full sm:w-auto">
                 Terapkan Filter
             </button>
 
             @if(request()->hasAny(['search', 'role', 'district_id']))
-                <a href="{{ route('admin.users.index') }}" class="px-3 py-2 bg-[#A7B5A0]/30 text-[#263B36] rounded text-xs font-medium hover:bg-[#A7B5A0]/50">
+                <a href="{{ route('admin.users.index') }}" class="px-3 py-2 bg-[#A7B5A0]/30 text-[#263B36] rounded text-xs font-medium hover:bg-[#A7B5A0]/50 text-center w-full sm:w-auto">
                     Atur Ulang
                 </a>
             @endif
         </form>
 
         <a href="{{ route('admin.users.create') }}"
-            class="px-4 py-2 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs transition shrink-0">
+            class="px-4 py-2 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs transition shrink-0 text-center w-full md:w-auto">
             + Tambah Pengguna Baru
         </a>
     </div>

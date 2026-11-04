@@ -3,11 +3,11 @@
 @section('title', 'Masuk — ROVIX Road Vigilance & Index')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-[#E9E5DA] p-6">
+<div class="min-h-screen flex items-center justify-center bg-[#E9E5DA] p-4 sm:p-6">
     <div class="max-w-4xl w-full grid md:grid-cols-12 bg-[#F4F1EA] rounded-lg border border-[#263B36]/20 overflow-hidden shadow-sm">
 
         <!-- Kolom Kiri: Identitas Sistem (Forest Green #263B36) -->
-        <div class="md:col-span-6 bg-[#263B36] text-[#E9E5DA] p-9 flex flex-col justify-between">
+        <div class="md:col-span-6 bg-[#263B36] text-[#E9E5DA] p-6 sm:p-9 flex flex-col justify-between">
             <div>
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 rounded bg-[#C76B45] text-white flex items-center justify-center">
@@ -54,7 +54,7 @@
         </div>
 
         <!-- Kolom Kanan: Form Otentikasi -->
-        <div class="md:col-span-6 p-9 flex flex-col justify-center text-[#353A37]">
+        <div class="md:col-span-6 p-6 sm:p-9 flex flex-col justify-center text-[#353A37]">
             <div class="mb-6">
                 <p class="font-mono-tech text-[10px] uppercase tracking-widest text-[#C76B45] font-semibold mb-1">Otentikasi Pengguna</p>
                 <h3 class="text-xl font-bold text-[#263B36] tracking-tight">Masuk ke Portal Sistem</h3>
