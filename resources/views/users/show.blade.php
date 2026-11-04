@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Rincian Profil Pengguna — ROVIX')
-@section('header', 'Rincian Profil & Otorisasi Pengguna')
-@section('subheader', 'Informasi identitas akun, penugasan wilayah kecamatan, dan rekam jejak operasional')
+@section('title', 'Detail Pengguna — ROVIX')
+@section('header', 'Detail Profil Pengguna')
+@section('subheader', 'Informasi akun, wilayah tugas, dan riwayat aktivitas pengguna')
 
 @section('content')
 <div class="max-w-4xl space-y-4">
@@ -27,7 +27,7 @@
 
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <a href="{{ route('admin.users.edit', $user) }}" class="px-3.5 py-2 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs text-center flex-1 sm:flex-none">
-                Ubah Data
+                Edit Data
             </a>
             <a href="{{ route('admin.users.index') }}" class="px-3.5 py-2 bg-[#E9E5DA] hover:bg-[#A7B5A0]/40 text-[#263B36] border border-[#263B36]/15 font-semibold rounded text-xs text-center flex-1 sm:flex-none">
                 &larr; Kembali

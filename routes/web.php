@@ -44,7 +44,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::view('/work-orders', 'layouts.placeholder', [
         'title' => 'Disposisi Surat Perintah Kerja (SPK) Digital',
-        'subtitle' => 'Penerbitan SPK perbaikan jalan, penugasan petugas teknis lapangan, dan pemantauan target SLA',
+        'subtitle' => 'Penerbitan SPK perbaikan jalan, pembagian beban kerja petugas otomatis, dan pemantauan target SLA',
         'description' => 'Modul pengelolaan disposisi SPK digital dari laporan yang telah terverifikasi kepada petugas teknis lapangan.',
     ])->name('work-orders.index');
 
@@ -61,9 +61,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     ])->name('districts.index');
 
     Route::view('/ratings', 'layouts.placeholder', [
-        'title' => 'Evaluasi & Indeks Kepuasan Masyarakat',
+        'title' => 'Rating & Ulasan Warga',
         'subtitle' => 'Rekapitulasi penilaian rating bintang 1–5 dan ulasan warga terhadap hasil perbaikan jalan',
-        'description' => 'Modul pemantauan dan evaluasi mutu hasil pengerjaan petugas lapangan berdasarkan ulasan warga pelapor.',
+        'description' => 'Modul pemantauan dan evaluasi hasil pengerjaan petugas lapangan berdasarkan ulasan warga pelapor.',
     ])->name('ratings.index');
 });
 
@@ -72,9 +72,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // =========================================================================
 Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petugas.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'petugasDashboard'])->name('dashboard');
+    Route::get('/history', [DashboardController::class, 'petugasHistory'])->name('history');
+    Route::patch('/work-orders/{workOrder}/status', [DashboardController::class, 'updateWorkOrderStatus'])->name('work-orders.update-status');
 
     Route::view('/work-orders', 'layouts.placeholder', [
-        'title' => 'Pembaruan Progres & Bukti Fisik Perbaikan',
+        'title' => 'Update Progres & Bukti Fisik Perbaikan',
         'subtitle' => 'Pembaruan status pengerjaan SPK di lapangan dan pengunggahan dokumentasi foto selesai diperbaiki',
         'description' => 'Modul lapangan bagi petugas teknis untuk memperbarui status SPK, mencatat pemakaian material, dan mengunggah foto hasil perbaikan.',
     ])->name('work-orders.index');

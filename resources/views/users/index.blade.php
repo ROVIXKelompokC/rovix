@@ -56,7 +56,7 @@
 
                 @if(request()->hasAny(['search', 'role', 'district_id']))
                     <a href="{{ route('admin.users.index') }}" class="px-3 py-2 bg-[#A7B5A0]/30 text-[#263B36] rounded text-xs font-medium hover:bg-[#A7B5A0]/50 text-center flex-1 sm:flex-none">
-                        Atur Ulang
+                        Reset
                     </a>
                 @endif
             </div>
@@ -76,11 +76,11 @@
             <thead class="bg-[#263B36] text-[#E9E5DA] font-mono-tech text-[10px] uppercase">
                 <tr>
                     <th class="px-4 py-2.5">Nama & Email</th>
-                    <th class="px-4 py-2.5">Otorisasi Peran</th>
+                    <th class="px-4 py-2.5">Role</th>
                     <th class="px-4 py-2.5">Wilayah Tugas</th>
                     <th class="px-4 py-2.5">Kontak</th>
-                    <th class="px-4 py-2.5">Rekam Aktivitas</th>
-                    <th class="px-4 py-2.5 text-right">Tindakan</th>
+                    <th class="px-4 py-2.5">Aktivitas</th>
+                    <th class="px-4 py-2.5 text-right">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-[#263B36]/10">
@@ -114,11 +114,11 @@
                         <div class="flex flex-wrap items-center justify-end gap-1.5 min-w-[170px]">
                             <a href="{{ route('admin.users.show', $u) }}"
                                 class="px-2.5 py-1 bg-[#E9E5DA] hover:bg-[#A7B5A0]/40 text-[#263B36] border border-[#263B36]/15 rounded font-medium">
-                                Rincian
+                                Detail
                             </a>
                             <a href="{{ route('admin.users.edit', $u) }}"
                                 class="px-2.5 py-1 bg-[#263B36] hover:bg-[#1d2e2a] text-white rounded font-medium">
-                                Ubah
+                                Edit
                             </a>
                             @if(auth()->id() !== $u->id)
                             <form action="{{ route('admin.users.destroy', $u) }}" method="POST" class="inline-flex"

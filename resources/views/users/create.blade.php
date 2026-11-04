@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Otorisasi Peran (Role RBAC)</label>
+                <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Role Pengguna</label>
                 <select name="role" required class="w-full px-3.5 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-sm bg-white focus:border-[#C76B45] outline-none">
                     <option value="petugas" {{ old('role') === 'petugas' ? 'selected' : '' }}>Petugas Lapangan (Pelaksana SPK)</option>
                     <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin Dinas PU (Pengelola Utama)</option>

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Ubah Pengguna & RBAC — ROVIX')
-@section('header', 'Pembaruan Data Akun & Otorisasi Peran')
-@section('subheader', 'Perbarui profil pengguna, hak akses sistem, dan penugasan wilayah kecamatan')
+@section('title', 'Edit Pengguna & RBAC — ROVIX')
+@section('header', 'Edit Data Akun Pengguna')
+@section('subheader', 'Perbarui profil pengguna, role, dan wilayah kecamatan')
 
 @section('content')
 <div class="max-w-3xl bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-5 sm:p-6">
@@ -40,7 +40,7 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Otorisasi Peran (RBAC)</label>
+                <label class="block text-xs font-semibold text-[#263B36] mb-1.5">Role Pengguna</label>
                 <select name="role" class="w-full px-3.5 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-sm bg-white focus:border-[#C76B45] outline-none">
                     <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>Admin Dinas PU</option>
                     <option value="petugas" {{ old('role', $user->role) === 'petugas' ? 'selected' : '' }}>Petugas Lapangan</option>

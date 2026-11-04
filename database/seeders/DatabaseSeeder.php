@@ -71,6 +71,28 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        User::updateOrCreate(
+            ['email' => 'petugas2@rovix.id'],
+            [
+                'name' => 'Andi Wijaya (Petugas Regu Teknis 02)',
+                'phone_number' => '081299887777',
+                'role' => 'petugas',
+                'district_id' => $pasarMinggu->id,
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'petugas3@rovix.id'],
+            [
+                'name' => 'Hendra Kusuma (Petugas Regu Teknis 03)',
+                'phone_number' => '081299887788',
+                'role' => 'petugas',
+                'district_id' => $pancoran->id,
+                'password' => Hash::make('password'),
+            ]
+        );
+
         $warga = User::updateOrCreate(
             ['email' => 'warga@rovix.id'],
             [
