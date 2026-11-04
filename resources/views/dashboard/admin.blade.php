@@ -66,43 +66,44 @@
         </div>
 
         <div class="lg:col-span-5 bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 overflow-hidden flex flex-col min-h-0">
-            <div class="px-3.5 py-1.5 border-b border-[#263B36]/15 flex flex-wrap items-center justify-between gap-2 shrink-0">
+            <div class="px-3.5 py-1.5 border-b border-[#263B36]/15 flex items-center justify-between gap-2 shrink-0">
                 <h3 class="font-bold text-[#263B36] text-xs uppercase tracking-wider">Distribusi Beban Kerja & Jadwal Petugas</h3>
+                <span class="text-[10px] font-mono-tech text-[#353A37]/70 shrink-0">OTOMATIS</span>
             </div>
-            <div class="overflow-auto flex-1">
+            <div class="overflow-y-auto flex-1">
                 <table class="w-full text-left text-xs">
                     <thead class="bg-[#263B36] text-[#E9E5DA] font-mono-tech text-[10px] uppercase sticky top-0">
                         <tr>
-                            <th class="px-3 py-1.5">Urutan</th>
-                            <th class="px-3 py-1.5">Nama Petugas & Wilayah</th>
-                            <th class="px-3 py-1.5">Beban SPK</th>
-                            <th class="px-3 py-1.5">Status Jadwal</th>
+                            <th class="px-3 py-1.5">Petugas & Wilayah</th>
+                            <th class="px-3 py-1.5 text-center">Beban SPK</th>
+                            <th class="px-3 py-1.5 text-right">Jadwal</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-[#263B36]/10">
                         @forelse($rankedOfficers as $index => $officer)
                         <tr class="hover:bg-[#E9E5DA]/60">
-                            <td class="px-3 py-1.5 font-mono-tech font-bold text-[#263B36] whitespace-nowrap">
-                                #{{ $index + 1 }}
-                                @if($index === 0)
-                                    <span class="ml-1 px-1.5 py-0.5 rounded bg-[#C76B45] text-white text-[9px] uppercase">Otomatis</span>
-                                @endif
+                            <td class="px-3 py-2">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="font-mono-tech font-bold text-[11px] text-[#263B36]">#{{ $index + 1 }}</span>
+                                    <span class="font-semibold text-[#353A37] truncate">{{ preg_replace('/\s*\(.*?\)/', '', $officer->name) }}</span>
+                                    @if($index === 0)
+                                        <span class="px-1.5 py-0.5 rounded bg-[#C76B45] text-white font-mono-tech text-[9px] uppercase shrink-0">Prioritas</span>
+                                    @endif
+                                </div>
+                                <p class="text-[10px] text-[#353A37]/70 mt-0.5">{{ $officer->district->name ?? 'Lintas Wilayah' }}</p>
                             </td>
-                            <td class="px-3 py-1.5">
-                                <p class="font-semibold text-[#353A37] leading-tight">{{ $officer->name }}</p>
-                                <p class="text-[10px] text-[#353A37]/70">{{ $officer->district->name ?? 'Lintas Wilayah' }}</p>
+                            <td class="px-3 py-2 text-center font-mono-tech text-[11px] whitespace-nowrap">
+                                <span class="font-bold text-[#263B36]">{{ $officer->active_spk_count }}</span> Aktif
+                                <span class="text-[#353A37]/40">•</span>
+                                <span class="text-[#353A37]/75">{{ $officer->completed_spk_count }} Selesai</span>
                             </td>
-                            <td class="px-3 py-1.5 font-mono-tech text-[11px] whitespace-nowrap">
-                                <span class="font-bold text-[#263B36]">{{ $officer->active_spk_count }}</span> Aktif •
-                                <span class="text-[#353A37]/70">{{ $officer->completed_spk_count }} Selesai</span>
-                            </td>
-                            <td class="px-3 py-1.5 whitespace-nowrap">
+                            <td class="px-3 py-2 text-right whitespace-nowrap">
                                 @if($officer->has_schedule_conflict)
-                                    <span class="px-2 py-0.5 rounded bg-[#C76B45]/20 text-[#C76B45] font-mono-tech font-semibold text-[10px]">
-                                        Terjadwal ({{ $officer->conflict_spk_number }})
+                                    <span class="inline-block px-2 py-0.5 rounded bg-[#C76B45]/20 text-[#C76B45] font-mono-tech font-semibold text-[10px]">
+                                        Terjadwal
                                     </span>
                                 @else
-                                    <span class="px-2 py-0.5 rounded bg-[#A7B5A0]/40 text-[#263B36] font-mono-tech font-semibold text-[10px]">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-[#A7B5A0]/40 text-[#263B36] font-mono-tech font-semibold text-[10px]">
                                         Tersedia
                                     </span>
                                 @endif
@@ -110,7 +111,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="px-3 py-4 text-center text-[#353A37]/60">Belum ada petugas terdaftar.</td>
+                            <td colspan="3" class="px-3 py-4 text-center text-[#353A37]/60">Belum ada petugas terdaftar.</td>
                         </tr>
                         @endforelse
                     </tbody>
