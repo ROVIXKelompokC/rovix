@@ -43,3 +43,10 @@ Sistem Informasi Pelaporan & Tindak Lanjut Kerusakan Jalan Berbasis Web Monoliti
    - **Admin Dinas PU:** `admin@rovix.id`
    - **Petugas Lapangan:** `petugas@rovix.id`
    - **Warga Pelapor:** `warga@rovix.id`
+
+---
+
+## 🛡️ Fitur RBAC & Manajemen Pengguna (`SCRUM-106` & `SCRUM-110`)
+- **Middleware Multi-Role (`role:admin`, `role:petugas`, `role:warga`):** Mengarahkan setiap pengguna secara otomatis ke halaman sesuai hak aksesnya.
+- **CRUD Pengguna & Penugasan Zona Wilayah:** Admin Dinas dapat menambah, melihat daftar, memfilter berdasarkan peran/kecamatan, melihat detail aktivitas, mengubah, dan menghapus akun pengguna.
+
