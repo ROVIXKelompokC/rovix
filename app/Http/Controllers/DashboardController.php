@@ -28,6 +28,9 @@ class DashboardController extends Controller
 
     public function adminDashboard(OfficerWorkloadService $workloadService)
     {
+        // Jalankan distribusi beban kerja otomatis untuk laporan terverifikasi yang belum memiliki SPK
+        $workloadService->autoDispatchVerifiedReports();
+
         $stats = [
             'total_reports' => Report::count(),
             'submitted_reports' => Report::where('status', 'submitted')->count(),

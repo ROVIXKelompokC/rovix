@@ -34,7 +34,11 @@ class UserController extends Controller
             $query->where('district_id', $request->integer('district_id'));
         }
 
-        $users = $query->latest()->paginate(8)->withQueryString();
+        $users = $query
+            ->orderByRaw("CASE role WHEN 'admin' THEN 1 WHEN 'petugas' THEN 2 WHEN 'warga' THEN 3 ELSE 4 END ASC")
+            ->orderBy('id', 'asc')
+            ->paginate(8)
+            ->withQueryString();
         $districts = District::orderBy('name')->get();
 
         $roleCounts = [
