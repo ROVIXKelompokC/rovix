@@ -48,12 +48,12 @@ class DatabaseSeeder extends Seeder
             ['severity_level' => 3]
         );
 
-        // 3. Seed Pengguna Multi-Role RBAC (users) sesuai kolom rovix_db: district_id, name, email, phone_number, password, role
+        // 3. Seed Pengguna Multi-Role RBAC (users) sesuai kolom rovix_db
         $admin = User::updateOrCreate(
             ['email' => 'admin@rovix.id'],
             [
-                'name' => 'Mazaya Nur Angelina (Admin Dinas PU)',
-                'phone_number' => '081210204240',
+                'name' => 'Administrator Dinas PU',
+                'phone_number' => '081210002000',
                 'role' => 'admin',
                 'district_id' => $jagakarsa->id,
                 'password' => Hash::make('password'),
@@ -81,29 +81,6 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
             ]
         );
-
-        // Akun Anggota Kelompok C
-        $members = [
-            ['name' => 'Anggoro Cipta Widodo (Dodo)', 'email' => 'dodo@rovix.id', 'role' => 'admin'],
-            ['name' => 'Hafiz Fadilah (Hafis)', 'email' => 'hafis@rovix.id', 'role' => 'admin'],
-            ['name' => 'Nazwa Atipa Ridwani (Tipa)', 'email' => 'tipa@rovix.id', 'role' => 'admin'],
-            ['name' => 'Guntur Khalil Gibran (Guntur)', 'email' => 'guntur@rovix.id', 'role' => 'admin'],
-            ['name' => 'Faliha Ersa Fathiana (Ersa)', 'email' => 'ersa@rovix.id', 'role' => 'petugas'],
-            ['name' => 'Naswa Nur Aqilah (Naswa)', 'email' => 'naswa@rovix.id', 'role' => 'warga'],
-        ];
-
-        foreach ($members as $m) {
-            User::updateOrCreate(
-                ['email' => $m['email']],
-                [
-                    'name' => $m['name'],
-                    'phone_number' => '081200001111',
-                    'role' => $m['role'],
-                    'district_id' => $pasarMinggu->id,
-                    'password' => Hash::make('password'),
-                ]
-            );
-        }
 
         // 4. Seed Contoh Laporan Aduan (reports) sesuai kolom rovix_db
         $rep1 = Report::updateOrCreate(

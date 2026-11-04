@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<!-- Peta Interaktif Sebaran Kerusakan Jalan (Leaflet.js) & Shortcut RBAC -->
+<!-- Peta Interaktif Sebaran Kerusakan Jalan (Leaflet.js) & Shortcut Navigasi -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
@@ -59,38 +59,46 @@
         <div id="adminMap" class="h-80 w-full z-0"></div>
     </div>
 
-    <!-- Panel Aksi Cepat Manajemen RBAC & Master Data -->
+    <!-- Panel Aksi Cepat Manajemen Operasional & RBAC -->
     <div id="master-data" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
         <div>
-            <h3 class="font-bold text-slate-800 text-sm mb-1">🛡️ Pusat Kontrol RBAC & Modul Tim</h3>
-            <p class="text-xs text-slate-500 mb-4">Kelola hak akses pengguna, regu lapangan, dan modul CRUD anggota tim</p>
+            <h3 class="font-bold text-slate-800 text-sm mb-1">🛡️ Akses Cepat Manajemen Sistem</h3>
+            <p class="text-xs text-slate-500 mb-4">Pintasan pengelolaan pengguna RBAC, verifikasi aduan, dan master data operasional</p>
 
-            <div class="space-y-3">
+            <div class="space-y-2.5">
                 <a href="{{ route('admin.users.index') }}" class="block p-3.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition">
                     <div class="flex items-center justify-between">
-                        <span class="font-semibold text-xs">👥 Daftar Pengguna & Hak Akses (RBAC)</span>
-                        <span class="text-xs text-amber-400 font-bold">Buka →</span>
+                        <span class="font-semibold text-xs">👥 Manajemen Pengguna & RBAC</span>
+                        <span class="text-xs text-amber-400 font-bold">Kelola →</span>
                     </div>
-                    <p class="text-[11px] text-slate-300 mt-1">SCRUM-110 • Lihat & filter akun Warga, Petugas, Admin</p>
+                    <p class="text-[11px] text-slate-300 mt-1">Lihat, filter, dan atur peran Warga, Petugas, serta Admin</p>
                 </a>
 
                 <a href="{{ route('admin.users.create') }}" class="block p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition">
                     <div class="flex items-center justify-between">
-                        <span class="font-semibold text-xs text-slate-900">➕ Tambah Akun Pengguna / Petugas Baru</span>
+                        <span class="font-semibold text-xs text-slate-900">➕ Tambah Akun Pengguna / Petugas</span>
                         <span class="text-xs text-amber-700 font-bold">Tambah →</span>
                     </div>
-                    <p class="text-[11px] text-slate-600 mt-1">SCRUM-106 • Registrasi akun baru & penugasan zona wilayah</p>
+                    <p class="text-[11px] text-slate-600 mt-1">Registrasi personel baru & penugasan zona wilayah</p>
                 </a>
 
-                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1.5">
-                    <p class="font-semibold text-slate-700">Status Integrasi Modul Kelompok C:</p>
-                    <p class="text-slate-500">• <strong>Users & RBAC (Angel):</strong> <span class="text-emerald-600 font-semibold">Aktif (rovix_db)</span></p>
-                    <p class="text-slate-500">• <strong>Laporan Warga (Dodo):</strong> Siap diintegrasikan</p>
-                    <p class="text-slate-500">• <strong>Verifikasi & GIS (Hafis):</strong> Siap diintegrasikan</p>
-                    <p class="text-slate-500">• <strong>Master Kategori (Tipa):</strong> Siap diintegrasikan</p>
-                    <p class="text-slate-500">• <strong>Master Wilayah (Guntur):</strong> Siap diintegrasikan</p>
-                    <p class="text-slate-500">• <strong>SPK Lapangan (Ersa):</strong> Siap diintegrasikan</p>
-                    <p class="text-slate-500">• <strong>Rating Warga (Naswa):</strong> Siap diintegrasikan</p>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <a href="{{ route('admin.verifications.index') }}" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+                        <p class="font-semibold text-xs text-slate-800">🗺️ Verifikasi GIS</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Triage & Audit Log</p>
+                    </a>
+                    <a href="{{ route('admin.work-orders.index') }}" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+                        <p class="font-semibold text-xs text-slate-800">🛠️ Disposisi SPK</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Penugasan & SLA</p>
+                    </a>
+                    <a href="{{ route('admin.categories.index') }}" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+                        <p class="font-semibold text-xs text-slate-800">🏷️ Kategori</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Level Keparahan</p>
+                    </a>
+                    <a href="{{ route('admin.districts.index') }}" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+                        <p class="font-semibold text-xs text-slate-800">📍 Wilayah</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Zonasi Kecamatan</p>
+                    </a>
                 </div>
             </div>
         </div>

@@ -42,48 +42,48 @@
 
             <nav class="flex-1 p-4 space-y-1.5 text-sm overflow-y-auto">
                 @if(auth()->user()->role === 'admin')
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-1">Menu Utama Admin</div>
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-1">Operasional & GIS</div>
                     <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
                         <span>📊</span> <span>Dasbor Peta & Metrik</span>
+                    </a>
+                    <a href="{{ route('admin.verifications.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.verifications.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>🗺️</span> <span>Verifikasi & Peta GIS</span>
+                    </a>
+                    <a href="{{ route('admin.work-orders.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.work-orders.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>🛠️</span> <span>Disposisi SPK Digital</span>
+                    </a>
+                    <a href="{{ route('admin.ratings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.ratings.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>⭐</span> <span>Evaluasi & Rating Warga</span>
+                    </a>
+
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 pt-4 pb-1">Master Data & RBAC</div>
+                    <a href="{{ route('admin.categories.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.categories.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>🏷️</span> <span>Master Kategori</span>
+                    </a>
+                    <a href="{{ route('admin.districts.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.districts.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>📍</span> <span>Master Wilayah</span>
                     </a>
                     <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.users.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
                         <span>👥</span> <span>Pengguna & RBAC</span>
                     </a>
-
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 pt-4 pb-1">Modul Tim (Sprint 1 & 2)</div>
-                    <a href="{{ route('warga.dashboard') }}" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>📸 Portal Aduan Warga</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Dodo</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard') }}#antrean-tiket" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>🗺️ Verifikasi & GIS</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Hafis</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard') }}#master-data" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>🏷️ Master Kategori</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Tipa</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard') }}#master-data" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>📍 Master Wilayah</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Guntur</span>
-                    </a>
-                    <a href="{{ route('petugas.dashboard') }}" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>🛠️ Disposisi SPK</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Ersa</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard') }}#rating-warga" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <span>⭐ Rating & Evaluasi</span>
-                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">Naswa</span>
-                    </a>
                 @elseif(auth()->user()->role === 'petugas')
                     <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-1">Field View Petugas</div>
-                    <a href="{{ route('petugas.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-semibold">
+                    <a href="{{ route('petugas.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('petugas.dashboard') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
                         <span>🛠️</span> <span>Daftar Tugas SPK Aktif</span>
+                    </a>
+                    <a href="{{ route('petugas.work-orders.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('petugas.work-orders.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>📷</span> <span>Update Progres & Foto</span>
                     </a>
                 @else
                     <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-1">Portal Warga</div>
-                    <a href="{{ route('warga.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-semibold">
+                    <a href="{{ route('warga.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('warga.dashboard') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
                         <span>🏠</span> <span>Beranda & Riwayat Aduan</span>
+                    </a>
+                    <a href="{{ route('warga.reports.create') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('warga.reports.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>📸</span> <span>Buat Laporan Baru</span>
+                    </a>
+                    <a href="{{ route('warga.ratings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('warga.ratings.*') ? 'bg-amber-500 text-slate-950 font-semibold' : 'text-slate-300 hover:bg-slate-800' }}">
+                        <span>⭐</span> <span>Ulasan & Rating Saya</span>
                     </a>
                 @endif
             </nav>
