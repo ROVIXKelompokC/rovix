@@ -20,6 +20,13 @@ class AuditLog extends Model
         'created_at',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime',
+        ];
+    }
+
     public function report()
     {
         return $this->belongsTo(Report::class);
