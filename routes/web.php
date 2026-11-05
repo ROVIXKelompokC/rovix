@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DistrictController; // <-- TAMBAHKAN IMPORT INI DI ATAS
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -35,7 +36,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // CRUD Pengguna & Role RBAC
     Route::resource('users', UserController::class);
 
-    // Kerangka Menu Fitur Operasional & Master Data (Siap dikerjakan anggota tim)
+    // GUNTUR - Master Data Wilayah & Zonasi Kecamatan (SCRUM-30 & SCRUM-34)
+    Route::resource('districts', DistrictController::class)->only(['index', 'create', 'store', 'show']);
+
+    // Kerangka Menu Fitur Operasional & Master Data (Anggota lain)
     Route::view('/verifications', 'layouts.placeholder', [
         'title' => 'Verifikasi Laporan & Pemetaan Web GIS',
         'subtitle' => 'Validasi laporan aduan masyarakat, deteksi duplikasi spasial, dan pencatatan audit log',
@@ -53,12 +57,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         'subtitle' => 'Pengelolaan klasifikasi jenis kerusakan infrastruktur jalan dan bobot tingkat keparahan (Severity Level)',
         'description' => 'Modul manajemen daftar kategori kerusakan jalan beserta indeks tingkat keparahan (skala 1 hingga 5).',
     ])->name('categories.index');
-
-    Route::view('/districts', 'layouts.placeholder', [
-        'title' => 'Master Data Wilayah & Zonasi Kecamatan',
-        'subtitle' => 'Pengelolaan daftar wilayah administratif kecamatan dan kode kota operasional Dinas PU',
-        'description' => 'Modul manajemen data master wilayah kecamatan untuk pengelompokan lokasi laporan dan penugasan zona petugas.',
-    ])->name('districts.index');
 
     Route::view('/ratings', 'layouts.placeholder', [
         'title' => 'Rating & Ulasan Warga',
