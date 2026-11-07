@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportVerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -35,12 +36,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // CRUD Pengguna & Role RBAC
     Route::resource('users', UserController::class);
 
-    // Kerangka Menu Fitur Operasional & Master Data (Siap dikerjakan anggota tim)
-    Route::view('/verifications', 'layouts.placeholder', [
-        'title' => 'Verifikasi Laporan & Pemetaan Web GIS',
-        'subtitle' => 'Validasi laporan aduan masyarakat, deteksi duplikasi spasial, dan pencatatan audit log',
-        'description' => 'Modul antrean verifikasi laporan masuk, peta sebaran titik kerusakan jalan, serta riwayat perubahan status (Audit Log).',
-    ])->name('verifications.index');
+    // SCRUM-8 & SCRUM-9: Modul Verifikasi Laporan, Peta GIS Leaflet.js, & Audit Log (Hafiz)
+    Route::get('/verification', [ReportVerificationController::class, 'index'])->name('verification.index');
+    Route::get('/verification/{id}', [ReportVerificationController::class, 'show'])->name('verification.show');
+    Route::post('/verification/{id}/approve', [ReportVerificationController::class, 'approve'])->name('verification.approve');
+    Route::post('/verification/{id}/reject', [ReportVerificationController::class, 'reject'])->name('verification.reject');
+
+    // Alias rute jamak (/admin/verifications) untuk kompatibilitas navigasi sidebar
+    Route::get('/verifications', [ReportVerificationController::class, 'index'])->name('verifications.index');
+    Route::get('/verifications/{id}', [ReportVerificationController::class, 'show'])->name('verifications.show');
+    Route::post('/verifications/{id}/approve', [ReportVerificationController::class, 'approve'])->name('verifications.approve');
+    Route::post('/verifications/{id}/reject', [ReportVerificationController::class, 'reject'])->name('verifications.reject');
 
     Route::view('/work-orders', 'layouts.placeholder', [
         'title' => 'Disposisi Surat Perintah Kerja (SPK) Digital',

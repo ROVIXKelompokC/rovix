@@ -120,7 +120,7 @@
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                         <span>Dashboard & Peta GIS</span>
                     </a>
-                    <a href="{{ route('admin.verifications.index') }}" class="flex items-center gap-2.5 px-2.5 py-1.5 rounded transition {{ request()->routeIs('admin.verifications.*') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
+                    <a href="{{ route('admin.verification.index') }}" class="flex items-center gap-2.5 px-2.5 py-1.5 rounded transition {{ request()->routeIs('admin.verifications.*', 'admin.verification.*') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
                         <span>Verifikasi Laporan</span>
                     </a>
@@ -237,7 +237,7 @@
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 <span>Dashboard</span>
             </a>
-            <a href="{{ route('admin.verifications.index') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('admin.verifications.*') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
+            <a href="{{ route('admin.verification.index') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('admin.verifications.*', 'admin.verification.*') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>
                 <span>Verifikasi</span>
             </a>
