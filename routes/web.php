@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportVerificationController;
+use App\Http\Controllers\Admin\ReportCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -54,11 +55,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         'description' => 'Modul pengelolaan disposisi SPK digital dari laporan yang telah terverifikasi kepada petugas teknis lapangan.',
     ])->name('work-orders.index');
 
-    Route::view('/categories', 'layouts.placeholder', [
-        'title' => 'Master Data Kategori Kerusakan Jalan',
-        'subtitle' => 'Pengelolaan klasifikasi jenis kerusakan infrastruktur jalan dan bobot tingkat keparahan (Severity Level)',
-        'description' => 'Modul manajemen daftar kategori kerusakan jalan beserta indeks tingkat keparahan (skala 1 hingga 5).',
-    ])->name('categories.index');
+    Route::get('/categories', [ReportCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [ReportCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [ReportCategoryController::class, 'store'])->name('categories.store');
 
     Route::view('/districts', 'layouts.placeholder', [
         'title' => 'Master Data Wilayah & Zonasi Kecamatan',
