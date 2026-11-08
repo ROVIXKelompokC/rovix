@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RatingController;
 
 Route::get('/', function () {
     return auth()->check()
@@ -107,3 +108,9 @@ Route::middleware(['auth', 'role:warga,admin'])->prefix('warga')->name('warga.')
         'description' => 'Modul evaluasi kepuasan warga terhadap kualitas dan kecepatan tindak lanjut perbaikan jalan oleh Dinas PU.',
     ])->name('ratings.index');
 });
+// ==================================================
+// Modul Rating & Evaluasi Warga (Naswa)
+// ==================================================
+Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
+Route::get('/reports/{report}/rate', [RatingController::class, 'create'])->name('ratings.create');
+Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
