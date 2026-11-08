@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\ReportVerificationController;
+use App\Http\Controllers\Admin\ReportCategoryController;
 use App\Http\Controllers\FieldWorkOrderController;
 use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\AuthController;
@@ -55,17 +56,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/verifications/{id}/approve', [ReportVerificationController::class, 'approve'])->name('verifications.approve');
     Route::post('/verifications/{id}/reject', [ReportVerificationController::class, 'reject'])->name('verifications.reject');
 
-       // SCRUM-38 & SCRUM-42: Modul Disposisi SPK Digital (Ersa)
-   Route::get('/work-orders', [WorkOrderController::class, 'index'])->name('work-orders.index');
-   Route::get('/work-orders/create', [WorkOrderController::class, 'create'])->name('work-orders.create');
-   Route::post('/work-orders', [WorkOrderController::class, 'store'])->name('work-orders.store');
-   Route::get('/work-orders/{workOrder}', [WorkOrderController::class, 'show'])->name('work-orders.show');
+    // SCRUM-38 & SCRUM-42: Modul Disposisi SPK Digital (Ersa)
+    Route::get('/work-orders', [WorkOrderController::class, 'index'])->name('work-orders.index');
+    Route::get('/work-orders/create', [WorkOrderController::class, 'create'])->name('work-orders.create');
+    Route::post('/work-orders', [WorkOrderController::class, 'store'])->name('work-orders.store');
+    Route::get('/work-orders/{workOrder}', [WorkOrderController::class, 'show'])->name('work-orders.show');
 
-    Route::view('/categories', 'layouts.placeholder', [
-        'title' => 'Master Data Kategori Kerusakan Jalan',
-        'subtitle' => 'Pengelolaan klasifikasi jenis kerusakan infrastruktur jalan dan bobot tingkat keparahan (Severity Level)',
-        'description' => 'Modul manajemen daftar kategori kerusakan jalan beserta indeks tingkat keparahan (skala 1 hingga 5).',
-    ])->name('categories.index');
+    // TIPA - Modul Master Kategori Kerusakan (SCRUM-22 & SCRUM-26)
+    Route::get('/categories', [ReportCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [ReportCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [ReportCategoryController::class, 'store'])->name('categories.store');
 
     Route::view('/ratings', 'layouts.placeholder', [
         'title' => 'Rating & Ulasan Warga',
