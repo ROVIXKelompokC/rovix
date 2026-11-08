@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\ReportVerificationController;
 use App\Http\Controllers\Admin\ReportCategoryController;
+use App\Http\Controllers\FieldWorkOrderController;
+use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +41,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // CRUD Pengguna & Role RBAC
     Route::resource('users', UserController::class);
 
+    // GUNTUR - Master Data Wilayah & Zonasi Kecamatan (SCRUM-30 & SCRUM-34)
+    Route::resource('districts', DistrictController::class)->only(['index', 'create', 'store', 'show']);
+
     // SCRUM-8 & SCRUM-9: Modul Verifikasi Laporan, Peta GIS Leaflet.js, & Audit Log (Hafiz)
     Route::get('/verification', [ReportVerificationController::class, 'index'])->name('verification.index');
     Route::get('/verification/{id}', [ReportVerificationController::class, 'show'])->name('verification.show');
@@ -49,21 +56,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/verifications/{id}/approve', [ReportVerificationController::class, 'approve'])->name('verifications.approve');
     Route::post('/verifications/{id}/reject', [ReportVerificationController::class, 'reject'])->name('verifications.reject');
 
-    Route::view('/work-orders', 'layouts.placeholder', [
-        'title' => 'Disposisi Surat Perintah Kerja (SPK) Digital',
-        'subtitle' => 'Penerbitan SPK perbaikan jalan, pembagian beban kerja petugas otomatis, dan pemantauan target SLA',
-        'description' => 'Modul pengelolaan disposisi SPK digital dari laporan yang telah terverifikasi kepada petugas teknis lapangan.',
-    ])->name('work-orders.index');
+    // SCRUM-38 & SCRUM-42: Modul Disposisi SPK Digital (Ersa)
+    Route::get('/work-orders', [WorkOrderController::class, 'index'])->name('work-orders.index');
+    Route::get('/work-orders/create', [WorkOrderController::class, 'create'])->name('work-orders.create');
+    Route::post('/work-orders', [WorkOrderController::class, 'store'])->name('work-orders.store');
+    Route::get('/work-orders/{workOrder}', [WorkOrderController::class, 'show'])->name('work-orders.show');
 
+    // TIPA - Modul Master Kategori Kerusakan (SCRUM-22 & SCRUM-26)
     Route::get('/categories', [ReportCategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [ReportCategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [ReportCategoryController::class, 'store'])->name('categories.store');
-
-    Route::view('/districts', 'layouts.placeholder', [
-        'title' => 'Master Data Wilayah & Zonasi Kecamatan',
-        'subtitle' => 'Pengelolaan daftar wilayah administratif kecamatan dan kode kota operasional Dinas PU',
-        'description' => 'Modul manajemen data master wilayah kecamatan untuk pengelompokan lokasi laporan dan penugasan zona petugas.',
-    ])->name('districts.index');
 
     Route::view('/ratings', 'layouts.placeholder', [
         'title' => 'Rating & Ulasan Warga',
@@ -79,6 +81,7 @@ Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petu
     Route::get('/dashboard', [DashboardController::class, 'petugasDashboard'])->name('dashboard');
     Route::get('/history', [DashboardController::class, 'petugasHistory'])->name('history');
     Route::patch('/work-orders/{workOrder}/status', [DashboardController::class, 'updateWorkOrderStatus'])->name('work-orders.update-status');
+    Route::get('/work-orders/{workOrder}', [FieldWorkOrderController::class, 'show'])->name('work-orders.show');
 
     Route::view('/work-orders', 'layouts.placeholder', [
         'title' => 'Update Progres & Bukti Fisik Perbaikan',
@@ -93,11 +96,11 @@ Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petu
 Route::middleware(['auth', 'role:warga,admin'])->prefix('warga')->name('warga.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'wargaDashboard'])->name('dashboard');
 
-    Route::view('/reports/create', 'layouts.placeholder', [
-        'title' => 'Buat Laporan Kerusakan Jalan Baru',
-        'subtitle' => 'Unggah foto kerusakan jalan, penguncian koordinat GPS otomatis, dan validasi citra berbasis AI',
-        'description' => 'Modul formulir pengajuan laporan kerusakan jalan oleh warga lengkap dengan pengambilan titik koordinat lokasi dan pemeriksaan AI.',
-    ])->name('reports.create');
+    // SCRUM-6 & SCRUM-7: Pengajuan Laporan & Riwayat Laporan Aduan Warga
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::get('/reports/{id}', [ReportController::class, 'show'])->name('reports.show');
 
     Route::view('/ratings', 'layouts.placeholder', [
         'title' => 'Penilaian & Ulasan Hasil Perbaikan Jalan',

@@ -26,9 +26,22 @@
         <a href="{{ route('petugas.history') }}" class="font-mono-tech text-xs text-[#C76B45] font-semibold hover:underline">Lihat Riwayat Selesai &rarr;</a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+    <!-- Filter Status & Pencarian Tugas -->
+    <div class="flex flex-col sm:flex-row gap-2.5 mb-3.5">
+        <input type="text" id="spk-search" placeholder="Cari no. SPK, kode tiket, atau deskripsi..."
+            class="px-3 py-2 rounded border border-[#263B36]/25 bg-white text-[#353A37] text-xs w-full sm:w-72 focus:border-[#C76B45] outline-none">
+        <select id="spk-status" class="px-3 py-2 rounded border border-[#263B36]/25 text-[#353A37] text-xs bg-white w-full sm:w-auto">
+            <option value="">Semua Status</option>
+            <option value="assigned">Assigned</option>
+            <option value="in_progress">In Progress</option>
+        </select>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5" id="spk-list">
         @forelse($myWorkOrders as $wo)
-        <div class="p-4 rounded-lg border border-[#263B36]/15 bg-[#E9E5DA]/50 flex flex-col justify-between">
+        <div class="spk-card p-4 rounded-lg border border-[#263B36]/15 bg-[#E9E5DA]/50 flex flex-col justify-between"
+            data-status="{{ $wo->work_status }}"
+            data-search="{{ strtolower($wo->spk_number . ' ' . ($wo->report->ticket_code ?? '') . ' ' . ($wo->report->description ?? '')) }}">
             <div>
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <span class="font-mono-tech font-bold text-xs text-[#263B36]">{{ $wo->spk_number }}</span>
@@ -63,11 +76,15 @@
                     </div>
                     <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
                         @if($wo->report)
-                        <a target="_blank" href="https://www.google.com/maps?q={{ $wo->report->latitude }},{{ $wo->report->longitude }}"
+                        <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{ $wo->report->latitude }},{{ $wo->report->longitude }}"
                             class="px-3 py-1.5 bg-[#E9E5DA] text-[#263B36] border border-[#263B36]/20 rounded text-xs font-semibold hover:bg-[#A7B5A0]/30 transition text-center flex-1 sm:flex-none">
-                            Buka Peta GPS
+                            Navigasi Google Maps
                         </a>
                         @endif
+                        <a href="{{ route('petugas.work-orders.show', $wo) }}"
+                            class="px-3 py-1.5 bg-[#263B36] text-white rounded text-xs font-semibold hover:bg-[#1d2e2a] transition text-center flex-1 sm:flex-none">
+                            Detail SPK
+                        </a>
                         <button type="submit" class="px-3.5 py-1.5 bg-[#C76B45] hover:bg-[#b25c39] text-white rounded text-xs font-semibold transition text-center flex-1 sm:flex-none">
                             Simpan Status Kerja
                         </button>
@@ -81,5 +98,28 @@
         </div>
         @endforelse
     </div>
+    <p id="spk-empty" class="hidden text-center py-6 text-[#353A37]/60 text-xs">Tidak ada SPK yang cocok dengan pencarian atau filter.</p>
 </div>
+
+<script>
+    (function () {
+        var search = document.getElementById('spk-search');
+        var status = document.getElementById('spk-status');
+        var empty = document.getElementById('spk-empty');
+        var cards = document.querySelectorAll('.spk-card');
+        function apply() {
+            var q = search.value.trim().toLowerCase();
+            var st = status.value;
+            var shown = 0;
+            cards.forEach(function (c) {
+                var ok = (!st || c.dataset.status === st) && (!q || c.dataset.search.indexOf(q) !== -1);
+                c.style.display = ok ? '' : 'none';
+                if (ok) shown++;
+            });
+            empty.classList.toggle('hidden', shown > 0 || cards.length === 0);
+        }
+        search.addEventListener('input', apply);
+        status.addEventListener('change', apply);
+    })();
+</script>
 @endsection

@@ -77,10 +77,10 @@
     <!-- Backdrop Overlay Drawer Mobile -->
     <div id="mobileMenuBackdrop" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
 
-    <div class="flex min-h-screen lg:h-screen relative">
+    <div class="flex min-h-screen lg:h-screen relative overflow-hidden">
         <!-- Sidebar Navigasi Utama -->
         <aside id="sidebarDrawer"
-            class="fixed inset-y-0 left-0 z-50 w-56 lg:h-screen bg-[#263B36] text-[#E9E5DA] flex flex-col shrink-0 border-r border-[#1a2925] transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 ease-in-out">
+            class="fixed inset-y-0 left-0 z-50 w-56 lg:h-screen bg-[#263B36] text-[#E9E5DA] flex flex-col shrink-0 border-r border-[#1a2925] transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 ease-in-out overflow-y-auto">
             <div class="px-4 py-3 border-b border-[#A7B5A0]/15 flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
                     <div class="w-7 h-7 rounded bg-[#C76B45] flex items-center justify-center text-white shrink-0">
@@ -162,11 +162,11 @@
                     </a>
                 @else
                     <div class="text-[10px] font-mono-tech font-semibold text-[#A7B5A0]/70 uppercase tracking-widest px-2.5 pb-1">Menu Warga</div>
-                    <a href="{{ route('warga.dashboard') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.dashboard') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
+                    <a href="{{ route('warga.reports.index') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.index', 'warga.reports.show', 'warga.dashboard') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         <span>Riwayat Laporan Saya</span>
                     </a>
-                    <a href="{{ route('warga.reports.create') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.*') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
+                    <a href="{{ route('warga.reports.create') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.create') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                         <span>Buat Laporan Baru</span>
                     </a>
@@ -197,8 +197,8 @@
         </aside>
 
         <!-- Area Konten Utama Fleksibel -->
-        <div class="flex-1 flex flex-col min-w-0 lg:h-screen lg:overflow-y-auto bg-[#E9E5DA]">
-            <header class="bg-[#F4F1EA] border-b border-[#263B36]/15 px-4 sm:px-5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
+        <div class="flex-1 flex flex-col min-w-0 bg-[#E9E5DA] overflow-y-auto">
+            <header class="bg-[#F4F1EA] border-b border-[#263B36]/15 px-4 sm:px-5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0 sticky top-0 z-20">
                 <div>
                     <h2 class="text-sm sm:text-base font-bold text-[#263B36] tracking-tight leading-snug">@yield('header', 'Dashboard ROVIX')</h2>
                     <p class="text-[11px] text-[#353A37]/75">@yield('subheader', 'Sistem Informasi Pelaporan & Perbaikan Jalan')</p>
@@ -212,7 +212,7 @@
                 @endif
             </header>
 
-            <main class="flex-1 flex flex-col min-h-0 p-3 sm:p-4 lg:p-3 pb-20 lg:pb-3">
+            <main class="flex-1 p-3 sm:p-4 lg:p-3 pb-20 lg:pb-6">
                 @if(session('success'))
                     <div class="mb-3 px-3.5 py-2 rounded bg-[#A7B5A0]/25 border-l-2 border-[#263B36] text-[#263B36] text-xs font-medium">
                         {{ session('success') }}
@@ -259,11 +259,11 @@
                 <span>Riwayat</span>
             </a>
         @else
-            <a href="{{ route('warga.dashboard') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.dashboard') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
+            <a href="{{ route('warga.reports.index') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.index', 'warga.reports.show', 'warga.dashboard') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 <span>Riwayat</span>
             </a>
-            <a href="{{ route('warga.reports.create') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.*') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
+            <a href="{{ route('warga.reports.create') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.create') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>Lapor Jalan</span>
             </a>

@@ -27,7 +27,33 @@ class Report extends Model
     {
         return [
             'ai_validation' => 'boolean',
+            'latitude' => 'float',
+            'longitude' => 'float',
+            'ai_confidence' => 'float',
         ];
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return match ($this->status) {
+            'submitted' => 'Menunggu Verifikasi',
+            'verified' => 'Terverifikasi',
+            'in_progress' => 'Sedang Diperbaiki',
+            'resolved' => 'Selesai Diperbaiki',
+            'rejected' => 'Ditolak / Spam',
+            default => ucfirst((string) $this->status),
+        };
+    }
+
+    public function getPhotoSrcAttribute(): string
+    {
+        if (empty($this->photo_url)) {
+            return asset('images/placeholder-road.jpg');
+        }
+
+        return str_starts_with((string) $this->photo_url, 'http')
+            ? $this->photo_url
+            : asset('storage/' . ltrim((string) $this->photo_url, '/'));
     }
 
     public function user()
