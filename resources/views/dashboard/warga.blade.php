@@ -30,6 +30,15 @@
             <h3 class="font-bold text-[#263B36] text-xs uppercase tracking-wider">Riwayat & Status Tiket Laporan</h3>
             <p class="text-[11px] text-[#353A37]/70">Alur Status: Submitted &rarr; Verified &rarr; In Progress &rarr; Resolved</p>
         </div>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('warga.reports.index') }}" class="px-3 py-1.5 rounded text-xs font-semibold bg-[#263B36]/10 hover:bg-[#263B36]/20 text-[#263B36] transition flex items-center gap-1.5">
+                <span>Lihat Semua Riwayat</span>
+            </a>
+            <a href="{{ route('warga.reports.create') }}" class="px-3 py-1.5 rounded text-xs font-semibold bg-[#C76B45] hover:bg-[#a95734] text-white transition flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Buat Laporan</span>
+            </a>
+        </div>
     </div>
 
     <div class="divide-y divide-[#263B36]/10">
@@ -53,6 +62,9 @@
                     {{ $report->status === 'resolved' ? 'bg-[#A7B5A0]/40 text-[#263B36]' : ($report->status === 'in_progress' ? 'bg-[#263B36] text-white' : 'bg-[#C76B45]/20 text-[#C76B45]') }}">
                     {{ $report->status }}
                 </span>
+                <a href="{{ route('warga.reports.show', $report->id) }}" class="p-1.5 rounded hover:bg-[#263B36]/10 text-[#263B36] transition" title="Lihat Detail Tiket">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
             </div>
         </div>
         @empty

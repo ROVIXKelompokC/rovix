@@ -5,6 +5,7 @@ use App\Http\Controllers\FieldWorkOrderController;
 use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -97,11 +98,11 @@ Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petu
 Route::middleware(['auth', 'role:warga,admin'])->prefix('warga')->name('warga.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'wargaDashboard'])->name('dashboard');
 
-    Route::view('/reports/create', 'layouts.placeholder', [
-        'title' => 'Buat Laporan Kerusakan Jalan Baru',
-        'subtitle' => 'Unggah foto kerusakan jalan, penguncian koordinat GPS otomatis, dan validasi citra berbasis AI',
-        'description' => 'Modul formulir pengajuan laporan kerusakan jalan oleh warga lengkap dengan pengambilan titik koordinat lokasi dan pemeriksaan AI.',
-    ])->name('reports.create');
+    // SCRUM-6 & SCRUM-7: Pengajuan Laporan & Riwayat Laporan Aduan Warga
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::get('/reports/{id}', [ReportController::class, 'show'])->name('reports.show');
 
     Route::view('/ratings', 'layouts.placeholder', [
         'title' => 'Penilaian & Ulasan Hasil Perbaikan Jalan',
