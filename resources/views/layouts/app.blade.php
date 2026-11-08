@@ -162,11 +162,11 @@
                     </a>
                 @else
                     <div class="text-[10px] font-mono-tech font-semibold text-[#A7B5A0]/70 uppercase tracking-widest px-2.5 pb-1">Menu Warga</div>
-                    <a href="{{ route('warga.dashboard') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.dashboard') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
+                    <a href="{{ route('warga.reports.index') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.index', 'warga.reports.show', 'warga.dashboard') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         <span>Riwayat Laporan Saya</span>
                     </a>
-                    <a href="{{ route('warga.reports.create') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.*') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
+                    <a href="{{ route('warga.reports.create') }}" class="flex items-center gap-2.5 px-2.5 py-2 rounded transition {{ request()->routeIs('warga.reports.create') ? 'bg-[#C76B45] text-white font-semibold' : 'text-[#E9E5DA]/85 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                         <span>Buat Laporan Baru</span>
                     </a>
@@ -259,11 +259,11 @@
                 <span>Riwayat</span>
             </a>
         @else
-            <a href="{{ route('warga.dashboard') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.dashboard') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
+            <a href="{{ route('warga.reports.index') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.index', 'warga.reports.show', 'warga.dashboard') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 <span>Riwayat</span>
             </a>
-            <a href="{{ route('warga.reports.create') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.*') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
+            <a href="{{ route('warga.reports.create') }}" class="py-2.5 px-2 flex flex-col items-center justify-center gap-1 {{ request()->routeIs('warga.reports.create') ? 'text-[#C76B45] font-semibold' : 'text-[#E9E5DA]/75' }}">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>Lapor Jalan</span>
             </a>
