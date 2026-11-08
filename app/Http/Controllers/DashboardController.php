@@ -99,55 +99,6 @@ class DashboardController extends Controller
         return view('dashboard.petugas-history', compact('historyWorkOrders', 'stats'));
     }
 
-    public function updateWorkOrderStatus(Request $request, WorkOrder $workOrder)
-    {
-        $user = Auth::user();
-
-        if ($user->role === 'petugas' && (int) $workOrder->officer_id !== (int) $user->id) {
-            return back()->with('error', 'Anda tidak memiliki akses untuk mengubah SPK petugas lain.');
-        }
-
-        $validated = $request->validate([
-            'work_status' => 'required|in:assigned,in_progress,completed',
-            'repair_notes' => 'nullable|string|max:1000',
-        ]);
-
-        $workOrder->update([
-            'work_status' => $validated['work_status'],
-            'repair_notes' => $validated['repair_notes'] ?? $workOrder->repair_notes,
-            'resolved_at' => $validated['work_status'] === 'completed' ? now() : $workOrder->resolved_at,
-        ]);
-
-        // Sinkronkan status laporan induk dan catat di audit_logs
-        if ($workOrder->report) {
-            $oldReportStatus = $workOrder->report->status;
-            $newReportStatus = match ($validated['work_status']) {
-                'completed' => 'resolved',
-                'in_progress' => 'in_progress',
-                default => 'verified',
-            };
-
-            if ($oldReportStatus !== $newReportStatus) {
-                $workOrder->report->update(['status' => $newReportStatus]);
-
-                AuditLog::create([
-                    'report_id' => $workOrder->report->id,
-                    'user_id' => $user->id,
-                    'action_name' => 'SPK_STATUS_' . strtoupper($validated['work_status']),
-                    'previous_status' => $oldReportStatus,
-                    'new_status' => $newReportStatus,
-                ]);
-            }
-        }
-
-        if ($validated['work_status'] === 'completed') {
-            return redirect()->route('petugas.history')
-                ->with('success', "SPK {$workOrder->spk_number} telah diselesaikan dan dipindahkan ke Riwayat Pengerjaan.");
-        }
-
-        return back()->with('success', "Status kerja SPK {$workOrder->spk_number} berhasil diperbarui menjadi " . strtoupper($validated['work_status']) . ".");
-    }
-
     public function wargaDashboard()
     {
         $user = Auth::user();

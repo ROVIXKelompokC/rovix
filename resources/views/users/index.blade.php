@@ -116,19 +116,15 @@
                                 class="px-2.5 py-1 bg-[#E9E5DA] hover:bg-[#A7B5A0]/40 text-[#263B36] border border-[#263B36]/15 rounded font-medium">
                                 Detail
                             </a>
-                            <a href="{{ route('admin.users.edit', $u) }}"
-                                class="px-2.5 py-1 bg-[#263B36] hover:bg-[#1d2e2a] text-white rounded font-medium">
+                            <button type="button"
+                                class="px-2.5 py-1 bg-[#263B36] hover:bg-[#1d2e2a] text-white rounded font-medium cursor-pointer">
                                 Edit
-                            </a>
+                            </button>
                             @if(auth()->id() !== $u->id)
-                            <form action="{{ route('admin.users.destroy', $u) }}" method="POST" class="inline-flex"
-                                onsubmit="return confirm('Hapus akun {{ $u->name }} dari sistem?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="px-2.5 py-1 bg-[#C76B45] hover:bg-[#b25c39] text-white rounded font-medium">
-                                    Hapus
-                                </button>
-                            </form>
+                            <button type="button"
+                                class="px-2.5 py-1 bg-[#C76B45] hover:bg-[#b25c39] text-white rounded font-medium cursor-pointer">
+                                Hapus
+                            </button>
                             @endif
                         </div>
                     </td>

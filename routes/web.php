@@ -38,8 +38,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
 
-    // CRUD Pengguna & Role RBAC
-    Route::resource('users', UserController::class);
+    // CRUD Pengguna & Role RBAC (SCRUM-106 & SCRUM-110)
+    Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'show']);
 
     // GUNTUR - Master Data Wilayah & Zonasi Kecamatan (SCRUM-30 & SCRUM-34)
     Route::resource('districts', DistrictController::class)->only(['index', 'create', 'store', 'show']);
@@ -80,7 +80,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petugas.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'petugasDashboard'])->name('dashboard');
     Route::get('/history', [DashboardController::class, 'petugasHistory'])->name('history');
-    Route::patch('/work-orders/{workOrder}/status', [DashboardController::class, 'updateWorkOrderStatus'])->name('work-orders.update-status');
     Route::get('/work-orders/{workOrder}', [FieldWorkOrderController::class, 'show'])->name('work-orders.show');
 
     Route::view('/work-orders', 'layouts.placeholder', [

@@ -26,9 +26,9 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-            <a href="{{ route('admin.users.edit', $user) }}" class="px-3.5 py-2 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs text-center flex-1 sm:flex-none">
+            <button type="button" class="px-3.5 py-2 bg-[#C76B45] hover:bg-[#b25c39] text-white font-semibold rounded text-xs text-center flex-1 sm:flex-none cursor-pointer">
                 Edit Data
-            </a>
+            </button>
             <a href="{{ route('admin.users.index') }}" class="px-3.5 py-2 bg-[#E9E5DA] hover:bg-[#A7B5A0]/40 text-[#263B36] border border-[#263B36]/15 font-semibold rounded text-xs text-center flex-1 sm:flex-none">
                 &larr; Kembali
             </a>
