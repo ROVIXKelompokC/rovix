@@ -2,7 +2,7 @@
 
 @section('title', 'Tugas SPK Petugas — ROVIX')
 @section('header', 'Tugas SPK Lapangan')
-@section('subheader', 'Daftar Surat Perintah Kerja (SPK) Aktif & Update Status Pengerjaan')
+@section('subheader', 'Daftar Surat Perintah Kerja (SPK) Aktif & Navigasi Lapangan')
 
 @section('content')
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
@@ -56,40 +56,18 @@
                     <p>Kategori: {{ $wo->report->category->category_name ?? '-' }} • Target SLA: <span class="font-mono-tech font-semibold text-[#263B36]">{{ $wo->target_sla?->format('d/m/Y') }}</span></p>
                 </div>
 
-                <!-- Form Ubah Status Kerja Tiket Penugasan SPK -->
-                <form action="{{ route('petugas.work-orders.update-status', $wo) }}" method="POST" class="mt-3 pt-3 border-t border-[#263B36]/10 space-y-2.5">
-                    @csrf
-                    @method('PATCH')
-                    <div>
-                        <label class="block text-[11px] font-semibold text-[#263B36] mb-1">Ubah Status Kerja SPK</label>
-                        <select name="work_status" class="w-full px-3 py-1.5 rounded border border-[#263B36]/25 bg-white text-xs text-[#353A37] focus:border-[#C76B45] outline-none">
-                            <option value="assigned" {{ $wo->work_status === 'assigned' ? 'selected' : '' }}>Assigned (Baru Ditugaskan)</option>
-                            <option value="in_progress" {{ $wo->work_status === 'in_progress' ? 'selected' : '' }}>In Progress (Sedang Dikerjakan)</option>
-                            <option value="completed" {{ $wo->work_status === 'completed' ? 'selected' : '' }}>Completed (Selesai Diperbaiki)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-semibold text-[#263B36] mb-1">Catatan Pengerjaan Lapangan</label>
-                        <input type="text" name="repair_notes" value="{{ old('repair_notes', $wo->repair_notes) }}"
-                            placeholder="Catatan progres / material perbaikan..."
-                            class="w-full px-3 py-1.5 rounded border border-[#263B36]/25 bg-white text-xs text-[#353A37] focus:border-[#C76B45] outline-none">
-                    </div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-                        @if($wo->report)
-                        <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{ $wo->report->latitude }},{{ $wo->report->longitude }}"
-                            class="px-3 py-1.5 bg-[#E9E5DA] text-[#263B36] border border-[#263B36]/20 rounded text-xs font-semibold hover:bg-[#A7B5A0]/30 transition text-center flex-1 sm:flex-none">
-                            Navigasi Google Maps
-                        </a>
-                        @endif
-                        <a href="{{ route('petugas.work-orders.show', $wo) }}"
-                            class="px-3 py-1.5 bg-[#263B36] text-white rounded text-xs font-semibold hover:bg-[#1d2e2a] transition text-center flex-1 sm:flex-none">
-                            Detail SPK
-                        </a>
-                        <button type="submit" class="px-3.5 py-1.5 bg-[#C76B45] hover:bg-[#b25c39] text-white rounded text-xs font-semibold transition text-center flex-1 sm:flex-none">
-                            Simpan Status Kerja
-                        </button>
-                    </div>
-                </form>
+                <div class="mt-3 pt-3 border-t border-[#263B36]/10 flex flex-wrap items-center justify-end gap-2">
+                    @if($wo->report)
+                    <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{ $wo->report->latitude }},{{ $wo->report->longitude }}"
+                        class="px-3 py-1.5 bg-[#E9E5DA] text-[#263B36] border border-[#263B36]/20 rounded text-xs font-semibold hover:bg-[#A7B5A0]/30 transition text-center flex-1 sm:flex-none">
+                        Navigasi Google Maps
+                    </a>
+                    @endif
+                    <a href="{{ route('petugas.work-orders.show', $wo) }}"
+                        class="px-3 py-1.5 bg-[#263B36] text-white rounded text-xs font-semibold hover:bg-[#1d2e2a] transition text-center flex-1 sm:flex-none">
+                        Detail SPK
+                    </a>
+                </div>
             </div>
         </div>
         @empty
