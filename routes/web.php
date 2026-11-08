@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportVerificationController;
+use App\Http\Controllers\FieldWorkOrderController;
+use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -48,11 +50,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/verifications/{id}/approve', [ReportVerificationController::class, 'approve'])->name('verifications.approve');
     Route::post('/verifications/{id}/reject', [ReportVerificationController::class, 'reject'])->name('verifications.reject');
 
-    Route::view('/work-orders', 'layouts.placeholder', [
-        'title' => 'Disposisi Surat Perintah Kerja (SPK) Digital',
-        'subtitle' => 'Penerbitan SPK perbaikan jalan, pembagian beban kerja petugas otomatis, dan pemantauan target SLA',
-        'description' => 'Modul pengelolaan disposisi SPK digital dari laporan yang telah terverifikasi kepada petugas teknis lapangan.',
-    ])->name('work-orders.index');
+       // SCRUM-38 & SCRUM-42: Modul Disposisi SPK Digital (Ersa)
+   Route::get('/work-orders', [WorkOrderController::class, 'index'])->name('work-orders.index');
+   Route::get('/work-orders/create', [WorkOrderController::class, 'create'])->name('work-orders.create');
+   Route::post('/work-orders', [WorkOrderController::class, 'store'])->name('work-orders.store');
+   Route::get('/work-orders/{workOrder}', [WorkOrderController::class, 'show'])->name('work-orders.show');
 
     Route::view('/categories', 'layouts.placeholder', [
         'title' => 'Master Data Kategori Kerusakan Jalan',
@@ -80,6 +82,7 @@ Route::middleware(['auth', 'role:petugas,admin'])->prefix('petugas')->name('petu
     Route::get('/dashboard', [DashboardController::class, 'petugasDashboard'])->name('dashboard');
     Route::get('/history', [DashboardController::class, 'petugasHistory'])->name('history');
     Route::patch('/work-orders/{workOrder}/status', [DashboardController::class, 'updateWorkOrderStatus'])->name('work-orders.update-status');
+    Route::get('/work-orders/{workOrder}', [FieldWorkOrderController::class, 'show'])->name('work-orders.show');
 
     Route::view('/work-orders', 'layouts.placeholder', [
         'title' => 'Update Progres & Bukti Fisik Perbaikan',
