@@ -60,6 +60,7 @@ class RatingController extends Controller
             'user_id'     => Auth::id(),
             'score'       => $request->score,
             'review_text' => $request->review_text,
+            'created_at'  => now(),
         ]);
 
         $redirectRoute = Auth::user()->role === 'admin' ? 'admin.ratings.index' : 'warga.ratings.index';
