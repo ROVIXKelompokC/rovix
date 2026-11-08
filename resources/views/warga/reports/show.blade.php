@@ -212,6 +212,17 @@
                     Dinilai pada: {{ $report->rating->created_at?->format('d/m/Y H:i') }}
                 </p>
             </div>
+            @elseif($report->status === 'resolved' && auth()->id() === $report->user_id)
+            <div class="bg-[#F4F1EA] rounded-lg border border-[#C76B45]/40 p-4 shadow-sm flex items-center justify-between gap-3">
+                <div>
+                    <h4 class="font-bold text-xs text-[#263B36] uppercase tracking-wider">Berikan Penilaian Perbaikan</h4>
+                    <p class="text-[11px] text-[#353A37]/75 mt-0.5">Perbaikan jalan telah selesai. Berikan rating 1–5 atas hasil pengerjaan petugas.</p>
+                </div>
+                <a href="{{ route('ratings.create', $report->id) }}"
+                    class="px-3.5 py-2 rounded bg-[#C76B45] hover:bg-[#b25c39] text-white text-xs font-bold transition shrink-0">
+                    Beri Rating
+                </a>
+            </div>
             @endif
         </div>
 

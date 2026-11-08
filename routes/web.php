@@ -68,11 +68,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/categories/create', [ReportCategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [ReportCategoryController::class, 'store'])->name('categories.store');
 
-    Route::view('/ratings', 'layouts.placeholder', [
-        'title' => 'Rating & Ulasan Warga',
-        'subtitle' => 'Rekapitulasi penilaian rating bintang 1–5 dan ulasan warga terhadap hasil perbaikan jalan',
-        'description' => 'Modul pemantauan dan evaluasi hasil pengerjaan petugas lapangan berdasarkan ulasan warga pelapor.',
-    ])->name('ratings.index');
+    // NASWA - Modul Rating & Evaluasi Warga (SCRUM-46 & SCRUM-50)
+    Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
 });
 
 // =========================================================================
@@ -102,15 +99,15 @@ Route::middleware(['auth', 'role:warga,admin'])->prefix('warga')->name('warga.')
     Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('/reports/{id}', [ReportController::class, 'show'])->name('reports.show');
 
-    Route::view('/ratings', 'layouts.placeholder', [
-        'title' => 'Penilaian & Ulasan Hasil Perbaikan Jalan',
-        'subtitle' => 'Berikan penilaian bintang 1–5 dan ulasan atas tiket laporan yang telah selesai diperbaiki (Resolved)',
-        'description' => 'Modul evaluasi kepuasan warga terhadap kualitas dan kecepatan tindak lanjut perbaikan jalan oleh Dinas PU.',
-    ])->name('ratings.index');
+    // NASWA - Modul Rating & Evaluasi Warga (SCRUM-46 & SCRUM-50)
+    Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
 });
+
 // ==================================================
-// Modul Rating & Evaluasi Warga (Naswa)
+// Modul Rating & Evaluasi Warga (Naswa - SCRUM-46 & SCRUM-50)
 // ==================================================
-Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
-Route::get('/reports/{report}/rate', [RatingController::class, 'create'])->name('ratings.create');
-Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
+    Route::get('/reports/{report}/rate', [RatingController::class, 'create'])->name('ratings.create');
+    Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+});
