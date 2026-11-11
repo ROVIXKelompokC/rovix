@@ -119,6 +119,28 @@
                         </div>
                     </div>
 
+                    <!-- Foto Hasil Perbaikan (After) dari SPK Petugas -->
+                    @if($report->workOrder && $report->workOrder->after_photo_url)
+                    @php
+                        $afterSrc = str_starts_with((string) $report->workOrder->after_photo_url, 'http')
+                            ? $report->workOrder->after_photo_url
+                            : asset('storage/' . ltrim((string) $report->workOrder->after_photo_url, '/'));
+                    @endphp
+                    <div class="rounded-lg overflow-hidden border border-emerald-600/30 bg-emerald-50/40">
+                        <div class="px-3 py-2 flex items-center justify-between gap-2 border-b border-emerald-600/20">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-900">Foto Hasil Perbaikan (After) — {{ $report->workOrder->spk_number }}</span>
+                            <a href="{{ $afterSrc }}" target="_blank" rel="noopener" class="text-[10px] font-mono-tech text-emerald-800 hover:underline font-semibold">Perbesar &rarr;</a>
+                        </div>
+                        <img src="{{ $afterSrc }}" alt="Foto hasil perbaikan {{ $report->ticket_code }}"
+                            class="w-full h-56 object-cover" />
+                        @if($report->workOrder->repair_notes)
+                        <p class="px-3 py-2 text-[11px] text-emerald-900/80 border-t border-emerald-600/20">
+                            {{ $report->workOrder->repair_notes }}
+                        </p>
+                        @endif
+                    </div>
+                    @endif
+
                     <!-- Metrik Validasi AI & Klasifikasi Kerusakan -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div class="p-3 rounded bg-[#E9E5DA] border border-[#263B36]/10">

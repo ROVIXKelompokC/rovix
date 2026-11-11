@@ -48,6 +48,20 @@
             <p class="text-[10px] font-mono-tech uppercase text-[#353A37]/60">Instruksi Admin</p>
             <p class="text-xs text-[#353A37] mt-1 p-3 rounded bg-[#E9E5DA] border border-[#263B36]/10">{{ $workOrder->repair_notes ?: 'Tidak ada instruksi khusus.' }}</p>
         </div>
+
+        @if($workOrder->after_photo_url)
+        @php
+            $petugasAfterSrc = str_starts_with((string) $workOrder->after_photo_url, 'http')
+                ? $workOrder->after_photo_url
+                : asset('storage/' . ltrim((string) $workOrder->after_photo_url, '/'));
+        @endphp
+        <div>
+            <p class="text-[10px] font-mono-tech uppercase text-[#353A37]/60 mb-1.5">Bukti Foto Setelah Perbaikan (After)</p>
+            <img src="{{ $petugasAfterSrc }}" alt="Bukti foto perbaikan {{ $workOrder->spk_number }}"
+                class="w-full max-h-64 object-cover rounded border border-[#263B36]/15 bg-[#E9E5DA]">
+            <p class="text-[10px] font-mono-tech text-[#353A37]/55 mt-1">{{ $workOrder->after_photo_url }}</p>
+        </div>
+        @endif
     </div>
 
     <div class="bg-[#F4F1EA] rounded-lg border border-[#263B36]/15 p-4 sm:p-5 space-y-4 text-xs">

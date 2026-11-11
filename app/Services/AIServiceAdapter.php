@@ -37,8 +37,8 @@ class AIServiceAdapter
                     : 'image/jpeg';
 
                 if (! empty($binary)) {
-                    $response = Http::timeout(4)->post(
-                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={$apiKey}",
+                    $response = Http::timeout(30)->post(
+                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={$apiKey}",
                         [
                             'contents' => [
                                 [
