@@ -35,9 +35,20 @@
         </div>
 
         @if($workOrder->after_photo_url)
+        @php
+            $afterPhotoSrc = str_starts_with((string) $workOrder->after_photo_url, 'http')
+                ? $workOrder->after_photo_url
+                : asset('storage/' . ltrim((string) $workOrder->after_photo_url, '/'));
+        @endphp
         <div>
-            <p class="text-[10px] font-mono-tech uppercase text-[#353A37]/60">Bukti Foto Setelah Perbaikan</p>
-            <p class="text-xs font-mono-tech mt-1">{{ $workOrder->after_photo_url }}</p>
+            <div class="flex items-center justify-between mb-1.5">
+                <p class="text-[10px] font-mono-tech uppercase text-[#353A37]/60">Bukti Foto Setelah Perbaikan</p>
+                <a href="{{ $afterPhotoSrc }}" target="_blank" rel="noopener" class="text-[10px] font-mono-tech text-[#263B36] hover:underline font-semibold">Perbesar &rarr;</a>
+            </div>
+            <img src="{{ $afterPhotoSrc }}" alt="Bukti foto setelah perbaikan {{ $workOrder->spk_number }}"
+                class="w-full h-56 object-cover rounded border border-[#263B36]/15"
+                onerror="this.onerror=null; this.src='https://placehold.co/600x400/263B36/E9E5DA?text=Foto+Selesai+Diperbaiki';">
+            <p class="text-[10px] font-mono-tech text-[#353A37]/55 mt-1">{{ $workOrder->after_photo_url }}</p>
         </div>
         @endif
     </div>

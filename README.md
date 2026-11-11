@@ -41,3 +41,44 @@ Sistem Informasi Pelaporan dan Tindak Lanjut Kerusakan Jalan Berbasis Web (**Lar
    ```bash
    php artisan serve
    ```
+
+---
+
+## Setup setelah Clone
+
+Bagian ini berlaku untuk anggota yang melakukan clone baru maupun yang sudah punya folder proyek dan ingin menarik versi terbaru.
+
+1. Tarik kode terbaru dari repository (atau clone untuk pengguna baru):
+   ```bash
+   git pull origin main
+   ```
+   Bagi pengguna baru, clone dulu: `git clone https://github.com/ROVIXKelompokC/rovix.git` lalu `cd rovix`.
+2. Pasang dependensi Composer:
+   ```bash
+   composer install
+   ```
+   (Khusus clone baru: `cp .env.example .env` lalu `php artisan key:generate`, dan pastikan file `.env` menunjuk ke database MySQL `rovix_db` di Laragon.)
+3. Buat symlink storage (**wajib**, karena folder `/public/storage` tidak ikut di git). Tanpa langkah ini seluruh gambar laporan & bukti perbaikan akan tampil broken (404):
+   ```bash
+   php artisan storage:link
+   ```
+4. Siapkan database — **pilih salah satu**:
+
+   **Opsi A — Data contoh (seed):**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+   Akan membuat 3 laporan sample + 1 SPK selesai beserta seluruh fotonya. Catatan: 3 laporan hasil upload warga (RVX-2026-0004 s.d. RVX-2026-0006) tidak tersedia pada opsi ini.
+
+   **Opsi B — Data sama persis seperti milik Project Manager (import dump):**
+   ```bat
+   cmd /c "D:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysql.exe -h 127.0.0.1 -u root rovix_db < database\rovix_db.sql"
+   ```
+   Atau lewat phpMyAdmin: pilih database `rovix_db` → tab **Import** → pilih file `database/rovix_db.sql` → Go.
+   Opsi ini menampilkan **semua 6 laporan + SPK-002 beserta fotonya** persis seperti di komputer PM.
+5. Jalankan server pengembangan dan buka aplikasinya:
+   ```bash
+   php artisan serve
+   ```
+
+**Catatan gambar:** seluruh foto (laporan warga dan bukti foto perbaikan petugas) sudah di-commit ke repository di folder `storage/app/public/reports/` dan `storage/app/public/work_orders/`, sehingga setelah langkah 3–4 selesai, semua gambar otomatis tampil tanpa konfigurasi tambahan. Foto yang diupload langsung dari laptop anggota tersimpan hanya di laptop tersebut dan tidak otomatis ikut ke repository (folder storage di-gitignore), kecuali di-commit manual.
